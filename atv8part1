@@ -1,0 +1,104 @@
+using System;
+
+public class Pessoa{
+public String nome;
+public int idade;
+public int carteira=0;
+
+public void boasvindas(){
+    Console.WriteLine("boas vindas "+nome,"sua idade é "+idade,". Agora vamos lá");
+}
+
+	public void caminhar(){
+		Console.WriteLine("nossa como voce caminha");
+	}
+	public void fazer_arrumar( int local){
+		if(local == 1)
+        {
+            Console.WriteLine("arrumando cozinha!");
+			Console.WriteLine("comentarios:");
+			Console.ReadLine();
+			Console.WriteLine("cozinha arrumada");
+            
+        }
+        else if(local == 2)
+        {
+            Console.WriteLine("arrumando sala de estar!");
+			Console.WriteLine("comentarios:");
+			Console.ReadLine();
+			Console.WriteLine("sala de estar arrumada");
+            
+        }
+        else if(local == 3)
+        {
+            Console.WriteLine("arrumando dormitorios!");
+			Console.WriteLine("comentarios:");
+			Console.ReadLine();
+			Console.WriteLine("dormitorios arrumada");
+          
+        }
+        else if(local == 4)
+        {
+            Console.WriteLine("arrumando banheiro!");
+			Console.WriteLine("comentarios:");
+			Console.ReadLine();
+			Console.WriteLine("banheiro arrumada");   
+        }
+      }
+public void trabalhar(){
+	carteira += 1000;
+        Console.WriteLine("Saldo recebido!");
+}	
+	
+}
+
+public class Program
+{
+	public static void Main(string[] args)
+	{
+		Pessoa p=new Pessoa();
+		Console.WriteLine("O seu nome por favor:");
+		p.nome=Console.ReadLine();
+		Console.WriteLine("sua idade por favor");
+		p.idade=int.Parse(Console.ReadLine());
+		p.boasvindas();
+		
+		
+		
+		
+	while (true)
+            {
+                Console.WriteLine("O que você deseja fazer ? (Insira o número da atividade)");
+                Console.WriteLine("caminhar - 1");
+                Console.WriteLine("arrumar a casa - 2");
+                Console.WriteLine("trabalhar- 3");
+                
+                int opcao = int.Parse(Console.ReadLine());
+                switch(opcao)
+                {
+                    case 1:
+                        p.caminhar();
+                        break;
+
+                        case 2:
+                        Console.WriteLine("parte da casa?");
+                        Console.WriteLine("cozinha - 1");
+                        Console.WriteLine("sala de estar - 2");
+                        Console.WriteLine(" dormitorios- 3");
+                        Console.WriteLine("banheiro - 4");
+                        int escolha = int.Parse(Console.ReadLine());
+                        p.fazer_arrumar(escolha);
+                        break;
+
+
+                        case 3:
+                        p.trabalhar();
+						Console.WriteLine("seu saldo é: "+p.carteira);
+                        break;
+
+                        
+                }
+                
+	}
+}
+}
