@@ -1,0 +1,98 @@
+using System;
+				
+
+
+public class Jokempo{
+	public string Jogador;
+	public string cpu;
+	public  string Resultado;
+	public void jogada_maquina()
+    {
+        System.Random rnd = new System.Random();
+        
+        int jogada_maquina = rnd.Next(1, 4);
+
+
+        if (jogada_maquina == 1)
+        {
+             cpu = "Tesoura";
+        }
+        else if (jogada_maquina == 2)
+        {
+             cpu = "Papel";
+        }
+        else if (jogada_maquina == 3)
+        {
+             cpu = "Pedra";
+        }
+    }
+	
+	public string Cond_Vitoria(){
+		
+		
+if (Jogador == "Pedra" && cpu == "Tesoura"){
+    Resultado = ("Jogador 1 venceu.");
+    return Resultado;
+}
+
+else if (Jogador == "Papel" && cpu == "Pedra"){
+    Resultado = ("Jogador 1 venceu");
+    return Resultado;
+}
+
+else if (Jogador == "Tesoura" && cpu == "Papel"){
+    Resultado = ("Jogador 1 venceu");
+    return Resultado;
+}
+
+else if (cpu == "Pedra" && Jogador == "Tesoura"){
+    Resultado = ("Jogador 2 venceu.");
+    return Resultado;
+}
+
+else if (cpu == "Papel" && Jogador == "Pedra"){
+    Resultado = ("Jogador 2 venceu.");
+    return Resultado;
+}
+
+else if (cpu == "Tesoura" && Jogador == "Papel"){
+    Resultado = ("Jogador 2 venceu.");
+    return Resultado;
+}
+
+else{
+    Resultado = ("Erro ou Empate, tente novamente.");
+    return Resultado;
+}
+
+}
+}
+class Random
+{
+    Random rnd = new Random();
+}
+public class Program{
+	public static void Main(string[] args){
+  Console.WriteLine("Boas vindas ao Jokempo mais copiado ue voçê verá agora!!");//fusao de dois projetos 
+                                                                                //links:https://github.com/CaioViniciusCastro/Atividades_treino/blob/Aprendizado/jokempo
+		                                                                        //  https://github.com/IsaacScarpelli/Atvs-C-/blob/main/Atv%208%202
+Console.WriteLine("Quantas rodadas seu jogo terá?");
+int num_rodada = int.Parse(Console.ReadLine());
+
+for (int i = 0;i<num_rodada;i++){
+
+Jokempo a = new Jokempo();
+
+Console.WriteLine("Jogador: Digite (Pedra) para pedra, (Tesoura) para tesoura, e (Papel) para papel.");
+a.Jogador = Console.ReadLine();
+a.jogada_maquina();	
+
+
+
+Console.WriteLine(a.Cond_Vitoria());
+
+      }	
+	}
+}	
+		
+		
