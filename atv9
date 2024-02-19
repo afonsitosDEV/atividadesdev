@@ -1,0 +1,134 @@
+//class
+
+namespace Atividade_NOVE;
+
+public class classe
+{
+public int Numero {get; set;}
+public string Titular{get; set;}
+public  double Saldo{get; set;}
+public int Resposta_inicial{get; set;}
+public int Resposta_meio{get; set;}
+public int Resposta_final{get; set;}
+public double Quantia {get; set;}
+
+public void Dados (int numero, string titular, double saldo, double quantia){
+    numero = Numero;
+    titular = Titular;
+    saldo = Saldo;
+    quantia = Quantia;
+}
+
+
+public void Deposito(double quantia){
+    Saldo += quantia;
+}
+
+public void Saque (double quantia){
+    Saldo -= quantia;
+}
+
+public override string ToString() {
+return "Seus dados são:"
++ "Número da conta: " + Numero 
++ "\n"
++"Titular da conta: " + Titular 
++ "\n"
++"Saldo da conta:" + Saldo;
+}
+}
+
+//program
+
+using Atividade_NOVE;
+
+classe a = new classe();
+
+double depositar_dinheiro;
+double sacar_dinheiro;
+
+Console.WriteLine("Buenos dias, bem vindo ao nosso site bancário!");
+Console.WriteLine("Faça seu cadastro:");
+Console.WriteLine("Número da conta:");
+a.Numero = 8532;
+Console.WriteLine("8532");
+
+Console.Write("Nome do titular:");
+a.Titular = Console.ReadLine();
+
+Console.WriteLine("O senhor(a) deseja depositar ou sacar?(1/2))");
+a.Resposta_inicial = int.Parse(Console.ReadLine());
+
+if (a.Resposta_inicial == 1){
+    Console.WriteLine("Quanto o senhor deseja inserir?");
+    depositar_dinheiro = double.Parse(Console.ReadLine());
+    a.Deposito(depositar_dinheiro);
+}
+else if (a.Resposta_inicial == 2){
+    Console.WriteLine("Quanto o senhor deseja sacar?");
+    sacar_dinheiro = double.Parse(Console.ReadLine());
+    a.Saque(sacar_dinheiro);
+}
+else{
+    return;
+}
+
+Console.WriteLine("Ótima escolha, estes são os seus dados:");
+Console.WriteLine(a); //mostrar dados
+
+Console.WriteLine("Deseja encerrar o programa?(s/n)");
+char decisao = char.Parse(Console.ReadLine());
+
+if (decisao == 's'){
+    Console.WriteLine("Programa encerrado.");
+}
+else{
+
+Console.WriteLine("O senhor(a) deseja depositar ou sacar?(1/2))");
+a.Resposta_meio = int.Parse(Console.ReadLine());
+
+if (a.Resposta_meio == 1){
+    Console.WriteLine("Ótima escolha, quanto deseja inserir?");
+     depositar_dinheiro = double.Parse(Console.ReadLine());
+     a.Deposito(depositar_dinheiro);
+}
+else if (a.Resposta_meio == 2){
+    Console.WriteLine("Ótima escolha, quanto deseja sacar?");
+     sacar_dinheiro = double.Parse(Console.ReadLine());
+     a.Saque(sacar_dinheiro);
+}
+else{
+    return;
+}
+
+Console.WriteLine("Ótima escolha, estes são os seus dados:");
+Console.WriteLine(a); //mostrar dados
+
+Console.WriteLine("Deseja encerrar o programa?(s/n)");
+decisao = char.Parse(Console.ReadLine());
+
+if (decisao == 's'){
+    Console.WriteLine("Programa encerrado.");
+}
+else{
+
+Console.WriteLine("O senhor(a) deseja depositar ou sacar?(1/2))");
+a.Resposta_final = int.Parse(Console.ReadLine());
+
+if (a.Resposta_final == 1){
+    Console.WriteLine("Quanto o senhor deseja inserir?");
+     depositar_dinheiro = double.Parse(Console.ReadLine());
+     a.Deposito(depositar_dinheiro);
+}
+else if (a.Resposta_final == 2) {
+     sacar_dinheiro = double.Parse(Console.ReadLine());
+     a.Saque(sacar_dinheiro);
+}
+else{
+    return;
+}
+
+Console.WriteLine("Ótima escolha, estes são os seus dados:");
+Console.WriteLine(a); //mostrar dados
+}
+}
