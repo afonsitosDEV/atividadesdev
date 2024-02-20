@@ -1,0 +1,58 @@
+﻿using System;
+
+namespace Exercício_12
+{
+    class contaComum
+    {
+        public string _nome { get; set; }
+
+        public double _saldo { get; set; }
+
+        public contaComum(string nome, double saldo)
+        {
+            _nome = nome;
+            _saldo = saldo;
+        }
+
+        public void depositar(double valor)
+        {
+            _saldo += valor;
+        }
+
+        public void sacar(double valor)
+        {
+            _saldo -= valor;
+        }
+    }
+
+    class contaEmpresa : contaComum
+    {
+        public int _limiteEmpre { get; set; }
+
+        public void realizarEmprest(double valor, contaComum usuario)
+        {
+            if (valor <= _limiteEmpre)
+            {
+                _saldo -= valor;
+                usuario._saldo += valor;
+            }
+            else
+            {
+                Console.WriteLine("O empréstimo exedeu o valor limite");
+            }
+        }
+
+        public contaEmpresa(string nomeEmpre, double saldoEmpre, int limiteEmpre) : base(nomeEmpre, saldoEmpre)
+        {
+            _limiteEmpre = limiteEmpre;
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            contaEmpresa Sese = new contaEmpresa("Nicolas", 777, 50);
+        }
+    }
+}
