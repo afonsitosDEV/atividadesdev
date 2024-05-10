@@ -1,0 +1,74 @@
+using System;
+
+public interface IShape
+{
+    double CalculateArea();
+}
+
+public class Circle : IShape
+{
+    private readonly double radius;
+
+    public Circle(double radius)
+    {
+        this.radius = radius;
+    }
+
+    public double CalculateArea() => Math.PI * radius * radius;
+}
+
+public class Square : IShape
+{
+    private readonly double sideLength;
+
+    public Square(double sideLength)
+    {
+        this.sideLength = sideLength;
+    }
+
+    public double CalculateArea() => sideLength * sideLength;
+}
+
+public class Triangle : IShape
+{
+    private readonly double baseLength;
+    private readonly double height;
+
+    public Triangle(double baseLength, double height)
+    {
+        this.baseLength = baseLength;
+        this.height = height;
+    }
+
+    public double CalculateArea() => 0.5 * baseLength * height;
+}
+
+
+
+
+using NUnit.Framework;
+
+[TestFixture]
+public class ShapeTests
+{
+    [Test]
+    public void TestCircleArea()
+    {
+        Circle circle = new Circle(5);
+        Assert.AreEqual(78.53981633974483, circle.CalculateArea(), 0.0001);
+    }
+
+    [Test]
+    public void TestSquareArea()
+    {
+        Square square = new Square(4);
+        Assert.AreEqual(16, square.CalculateArea());
+    }
+
+    [Test]
+    public void TestTriangleArea()
+    {
+        Triangle triangle = new Triangle(6, 8);
+        Assert.AreEqual(24, triangle.CalculateArea());
+    }
+}
