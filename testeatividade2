@@ -1,0 +1,203 @@
+using System;
+using System.Net;
+using System.Net.Mail;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string email;
+        string senha;
+        bool validacao;
+        EmailValidator validador = new EmailValidator();
+        Console.WriteLine("Insira o número da ação que você deseja fazer: ");
+        Console.WriteLine("Fazer Login - 1");
+        Console.WriteLine("Criar Conta - 2");
+        int escolha = int.Parse(Console.ReadLine());
+        switch (escolha)
+        {
+            case 1:
+                Console.Write("Insira seu email de login: ");
+                email = Console.ReadLine();
+                Console.Write("Insira sua senha de login: ");
+                senha = Console.ReadLine();             
+                validacao = validador.IsValidEmailFormat(email);
+                if (validacao = true)
+                {
+                    Console.WriteLine("Conta logada com sucesso!");
+                }
+                else { Console.WriteLine("Erro no login verifique seu email ou senha"); }
+            break;
+
+            case 2:
+                Console.Write("Insira um email para a criação da conta : ");
+                email = Console.ReadLine();
+                Console.Write("Insira uma senha para a criação da conta : ");
+                senha = Console.ReadLine();
+                validacao = validador.IsValidEmailFormat(email);
+                if (validacao = true)
+                {
+                    Console.WriteLine("Conta criada com sucesso!");
+                }
+                else 
+                { Console.WriteLine("Erro na criação formato de email inválido!"); }
+                break;
+
+        }
+
+    }
+}
+
+
+
+
+
+
+using NUnit.Framework;
+using System;
+using System.Net;
+using System.Net.Mail;
+
+namespace Atv_2_TDD
+{
+    public class EmailValidator
+    {
+        public bool IsValidEmailFormat(string email)
+        {
+            try
+            {
+                MailAddress mailAddress = new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
+        public bool IsDomainActive(string email)
+        {
+            try
+            {
+                string domain = email.Split('@')[1];
+                IPHostEntry hostEntry = Dns.GetHostEntry(domain);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool IsMailServerResponding(string email)
+        {
+            try
+            {
+                string domain = email.Split('@')[1];
+                using (var client = new SmtpClient(domain))
+                {
+                    client.Port = 25;
+                    client.Timeout = 5000;
+                    client.Send(new MailMessage());
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+    }
+
+
+
+    [TestFixture]
+    public class EmailValidatorTests
+    {
+        private EmailValidator validator;
+
+        [SetUp]
+        public void SetUp()
+        {
+            validator = new EmailValidator();
+        }
+
+        [Test]
+        public void IsValidEmailFormat_ValidEmail_ReturnsTrue()
+        {
+            // Arrange
+            string email = "example@example.com";
+
+            // Act
+            bool result = validator.IsValidEmailFormat(email);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void IsValidEmailFormat_InvalidEmail_ReturnsFalse()
+        {
+            // Arrange
+            string email = "invalidemail";
+
+            // Act
+            bool result = validator.IsValidEmailFormat(email);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void IsDomainActive_ActiveDomain_ReturnsTrue()
+        {
+            // Arrange
+            string email = "example@example.com";
+
+            // Act
+            bool result = validator.IsDomainActive(email);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void IsDomainActive_InactiveDomain_ReturnsFalse()
+        {
+            // Arrange
+            string email = "example@nonexistentdomain.com";
+
+            // Act
+            bool result = validator.IsDomainActive(email);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void IsMailServerResponding_ServerResponding_ReturnsTrue()
+        {
+            // Arrange
+            string email = "example@example.com";
+
+            // Act
+            bool result = validator.IsMailServerResponding(email);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void IsMailServerResponding_ServerNotResponding_ReturnsFalse()
+        {
+            // Arrange
+            string email = "example@nonexistentdomain.com";
+
+            // Act
+            bool result = validator.IsMailServerResponding(email);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+    }
+}
