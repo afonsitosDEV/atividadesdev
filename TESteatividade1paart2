@@ -1,0 +1,149 @@
+ [TestFixture]
+    public class Tests
+    {
+        [SetUp]
+        public void Setup()
+        {
+        }
+
+        [Test]
+        public void TestSoma()
+        {
+            int a = 1;
+            int b = 4;
+
+            int resultado = a + b;
+
+            Assert.AreEqual(5,resultado);
+        }
+
+        [Test]
+        public void TestSubt()
+        {
+            int a = 5;
+            int b = 2;
+
+            int resultado = a - b;
+
+            Assert.AreEqual(3,resultado);
+        }
+
+        [Test]
+
+        public void TestMult()
+        {
+            int a = 5;
+            int b = 2;
+
+            int resultado = a * b;
+
+            Assert.AreEqual(10,resultado);
+        }
+
+        [Test]
+        public void Testdiv()
+        {
+            int a = 6;
+            int b = 3;
+
+            int resultado = a / b;
+
+            Assert.AreEqual(2,resultado);
+        }
+
+        
+    }
+}
+
+
+
+
+
+public class Calculadora
+{
+    double Num1;
+    double Num2;
+    double Resultado;
+    public Calculadora(double num1, double num2)
+    {
+        this.Num1 = num1;
+        this.Num2 = num2;
+    }
+
+    public Func<double, double, double> Soma = (a,b) => a + b;
+    public Func<double, double, double> Subt = (a, b) => a - b;
+    public Func<double, double, double> Mult = (a, b) => a * b;
+    public Func<double, double, double> Div = (a, b) => a / b;
+    public Func<double, bool> NumPrimo = num =>
+    {
+        if (num <= 1)
+            return false;
+        if (num == 2)
+            return true;
+        if (num % 2 == 0)
+            return false;
+
+        int sqrt = (int)Math.Sqrt(num);
+        for (int i = 3; i <= sqrt; i += 2)
+        {
+            if (num % i == 0)
+                return false;
+        }
+        return true;
+    };
+
+}
+
+
+
+
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Calculadora Calc = new Calculadora(2,3);
+        Console.WriteLine("Insira o primeiro número :");
+        double num1 = double.Parse(Console.ReadLine());
+
+        Console.WriteLine("Insira o segundo número :");
+        double num2 = double.Parse(Console.ReadLine());
+
+        Console.WriteLine("Insira o número correspondente á operação desejada :");
+        Console.WriteLine("Soma - 1");
+        Console.WriteLine("Subtração - 2");
+        Console.WriteLine("Multiplicação - 3");
+        Console.WriteLine("Divisão - 4");
+        Console.WriteLine("Verificar se é primo - 5");
+        int operacao = int.Parse(Console.ReadLine());
+
+        switch (operacao)
+        {
+            case 1:           
+                Console.WriteLine($"resultado da operação foi: {Calc.Soma(num1, num2)}");
+            break;
+
+            case 2:
+                Console.WriteLine($"resultado da operação foi: {Calc.Subt(num1, num2)}");
+                break;
+
+            case 3:
+                Console.WriteLine($"resultado da operação foi: {Calc.Mult(num1, num2)}");
+                break;
+
+            case 4:
+                Console.WriteLine($"resultado da operação foi: {Calc.Div(num1, num2)}");
+                break;
+
+            case 5:
+                Console.WriteLine($"O primeiro número é primo : {Calc.NumPrimo(num1)}");
+                Console.WriteLine($"O segundo número é primo : {Calc.NumPrimo(num1)}");
+                break;
+
+
+        }
+        
+    }
+}
